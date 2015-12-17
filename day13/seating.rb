@@ -23,9 +23,7 @@ class SeatingOptimizer
 
   def best_path(current_path, happiness = 0, best_happiness = 0)
     available_keys = @preferences.keys - current_path
-    if current_path.size > 1
-      happiness += score_for(current_path[-2], current_path.last)
-    end
+    happiness += score_for(current_path[-2], current_path.last) if current_path.size > 1
     if available_keys.empty?
       happiness += score_for(current_path.last, current_path.first)
       return [happiness, best_happiness].max
