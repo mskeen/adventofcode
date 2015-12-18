@@ -7,10 +7,8 @@ best_bit_count = @bits
 
 (1..(2**@bits - 1)).each do |i|
   sum = bit_count = 0
-  bit_count = 0
   (0..(@bits - 1)).each do |index|
-    bit = 2 ** index
-    if (bit & i) > 0
+    if ((2 ** index) & i) > 0
       sum += @source_buckets[index]
       bit_count += 1
     end
