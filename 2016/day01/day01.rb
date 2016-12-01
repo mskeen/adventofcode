@@ -23,14 +23,25 @@ def turn(direction, change)
 end
 
 begin
+  locations = Hash.new(0)
+  notfound = true
   direction = 'N'
   x = y = 0
 
   INPUT.split(', ').each do |move|
     direction = turn(direction, move[0])
     distance = move[1..-1].to_i
-    x += MOVEMENT[direction][0] * distance
-    y += MOVEMENT[direction][1] * distance
+
+    (1..distance).each do |step|
+      x += MOVEMENT[direction][0]
+      y += MOVEMENT[direction][1]
+
+      key = "#{x},#{y}"
+      if (locations[key] += 1) > 1 && notfound
+        notfound = false
+        puts "Part 2 answer: Location distance = #{x.abs + y.abs}"
+      end
+    end
   end
-  puts x.abs + y.abs
+  puts "Total distance #{x.abs + y.abs}"
 end
